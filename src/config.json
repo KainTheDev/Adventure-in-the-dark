@@ -1,0 +1,14 @@
+{
+    "bot": {
+        "inviteLink": "https://discord.com/api/oauth2/authorize?client_id=1199215017631944795&permissions=533113203776&scope=bot"
+    },
+    "defaultEmbedSettings": {
+        "color": "black",
+        "title": "AOTD -"
+    },
+    "owner": {
+        "id": "1059384621550288907",
+        "username": "nguyen.thien.nam",
+        "name": "Nam"
+    }
+}

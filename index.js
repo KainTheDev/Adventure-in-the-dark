@@ -1,18 +1,30 @@
-const express = require('express')
-const { join } = require('path')
-const app = express()
-const port = 2000
-
-app.use(express.static(join(process.cwd(), 'content')))
-
-app.get('/', (req, res) => {
-  res.sendFile(join(process.cwd(), 'main.html'))
-})
-
-app.get('/*', function (req, res) {
-  res.sendStatus(404)
+const express = require('express');
+const app = express();
+const PORT = 3000
+app.listen(PORT, () => {
+  console.log(`http://localhost:${PORT}`);
 });
 
-app.listen(port, () => {
-  console.log(`http://localhost:${port}`)
+const nodemon = require("nodemon");
+
+const process = nodemon({
+  "restartable": "rs",
+  "ignore": [".git", "node_modules/", "dist/"],
+  "watch": ["src/"],
+  "ext": "js",
+  "exec": "npm start"
 })
+process.on('restart', () => {
+  console.log('restarted.')
+})
+
+app.get('/restart', (req, res) => {
+  res.send('restarted.')
+  process.restart()
+});
+
+app.use((req, res) => {
+  res.redirect('/restart')
+})
+
+module.exports = app
